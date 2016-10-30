@@ -1,1 +1,1 @@
-# hotSearch
+# ChromeExtension

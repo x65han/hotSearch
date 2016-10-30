@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "UniSound Channels Manager",
+  "description": "Recommends the best fit channel to user on www.UniSoundLive.com",
+  "version": "1.0",
+  "browser_action": {
+     "default_icon": "icon.png",
+     "default_popup": "popup.html"
+  },
+  "content_scripts":[{
+      "matches":["<all_urls>"],
+      "js":["fetch.js"]
+  }] 
+}
