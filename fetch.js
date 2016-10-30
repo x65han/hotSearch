@@ -1,8 +1,5 @@
 console.clear();
-console.log("	 Fetching");
-window.onload = function(){
-	console.log("ready");
-}
+console.log("Fetching");
 // document.onkeyup = 
 document.onmouseup = document.onselectionchange = function() {
   	console.log(getSelectionText());
@@ -19,7 +16,7 @@ document.body.onkeydown = function(e) {
     	window.open("https://www.google.ca/search?q=" + query(getSelectionText(),"+"));
     }else if(key == 84){//Translate
     	if(getSelectionText() == null) return;
-    	window.open("https://translate.google.com/#auto/en/adsflk" + query(getSelectionText()," "));
+    	window.open("https://translate.google.com/#auto/en/" + query(getSelectionText()," "));
     }
 }
 // Utility Function
