@@ -1,6 +1,4 @@
-console.clear();
 console.log("Fetching");
-// document.onkeyup = 
 document.onmouseup = document.onselectionchange = function() {
   	console.log(getSelectionText());
 };
@@ -10,25 +8,26 @@ document.body.onkeydown = function(e) {
     console.log("Key Pressed: " + key);
     if(key == 87){//wikipedia
     	if(getSelectionText() == null) return;
-    	window.open("https://en.wikipedia.org/wiki/" + query(getSelectionText(),"_"));
+        chrome.runtime.sendMessage("https://en.wikipedia.org/wiki/" + query(getSelectionText()));
     }else if(key == 71){//Google
-    	if(getSelectionText() == null) return;
-    	window.open("https://www.google.ca/search?q=" + query(getSelectionText(),"+"));
+        if(getSelectionText() == null) return; 
+        chrome.runtime.sendMessage("https://www.google.ca/search?q=" + query(getSelectionText()));
     }else if(key == 84){//Translate
-    	if(getSelectionText() == null) return;
-    	window.open("https://translate.google.com/#auto/en/" + query(getSelectionText()," "));
+        if(getSelectionText() == null) return;
+        chrome.runtime.sendMessage("https://translate.google.com/#auto/en/" + query(getSelectionText()));
     }
 }
 // Utility Function
-function query(input, replace){
+function query(input){
     input = input.trim();
     for(var x = 0;x < input.length;x++){
         var temp = input.charCodeAt(x);
+        if(temp > 126) continue;
         if(temp == 32){
         	if(input.charCodeAt(x+1) == 32){
         		input = input.slice(0,x) + input.slice(x+1);x--;continue;
         	}
-        	input = input.slice(0,x) + replace +input.slice(x+1);continue;
+        	input = input.slice(0,x) + " " +input.slice(x+1);continue;
         }
         if((temp >= 48 && temp <= 57) || (temp >= 65 && temp <= 90) || (temp >= 97 && temp <= 122))continue;
         input = input.slice(0,x) + input.slice(x+1);x--;
